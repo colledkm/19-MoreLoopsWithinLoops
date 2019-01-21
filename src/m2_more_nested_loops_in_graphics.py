@@ -4,8 +4,8 @@ in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Katana Colledge.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -50,9 +50,30 @@ def draw_upside_down_wall(rectangle, n, window):
     and n is nonnegative.
     """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     Some tests are already written for you (above).
     # -------------------------------------------------------------------------
+    newrectangle = rectangle.clone()
+    llcorner = newrectangle.get_lower_left_corner()
+    urcorner = newrectangle.get_upper_right_corner()
+    width = newrectangle.get_width()
+    height = newrectangle.get_height()
+
+    for k in range(n):
+        for j in range(k+1):
+            newrectangle = rg.Rectangle(llcorner,urcorner)
+            newrectangle.attach_to(window)
+            window.render()
+            llcorner.x = llcorner.x+width
+            urcorner.x = urcorner.x+width
+        llcorner = rectangle.get_lower_left_corner()
+        urcorner = rectangle.get_upper_right_corner()
+        llcorner.x = llcorner.x - width*0.5*(k+1)
+        urcorner.x = urcorner.x - width*0.5*(k+1)
+        llcorner.y = llcorner.y - height*(k+1)
+        urcorner.y = urcorner.y - height*(k+1)
+
+
 
 
 # -----------------------------------------------------------------------------
